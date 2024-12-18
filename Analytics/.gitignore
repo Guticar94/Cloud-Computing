@@ -1,0 +1,9 @@
+*.csv
+*.dbf
+*.json
+
+
+.DS_*
+
+
+GCCSA_2021_AUST_SHP_GDA2020*

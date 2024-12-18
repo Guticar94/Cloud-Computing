@@ -1,0 +1,57 @@
+# Common vars
+avlblt_zn: melbourne-qh2-uom
+instnc_img: bbaf16f8-2484-48d7-b455-42209cc4b8d2
+instnc_flvr: uom.mse.2c9g
+instnc_ntwrk: qh2-uom-internal
+instnc_kynm: grp4_kypr
+sg_names: ["default", "ssh", "http", "grp4_sg_icmp", "grp4_sg_couchdb", "grp4_sg_swarm"]
+
+# Volumes
+volumes:
+  - vol_name: grp4_vol_01_01
+    vol_size: 70
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: grp4_vol_02_01
+    vol_size: 70
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: grp4_vol_03_01
+    vol_size: 70
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: grp4_vol_04_01
+    vol_size: 30
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: grp4_vol_01_02
+    vol_size: 30
+    device: /dev/vdc
+    mountpoint: /app
+  - vol_name: grp4_vol_02_02
+    vol_size: 30
+    device: /dev/vdc
+    mountpoint: /app
+  - vol_name: grp4_vol_03_02
+    vol_size: 30
+    device: /dev/vdc
+    mountpoint: /app
+  - vol_name: grp4_vol_04_02
+    vol_size: 30
+    device: /dev/vdc
+    mountpoint: /app
+
+# Instances
+instances:
+  - name: grp4_instn_001
+    volumes: ["grp4_vol_01_01","grp4_vol_01_02"]
+
+  - name: grp4_instn_002
+    volumes: ["grp4_vol_02_01", "grp4_vol_02_02"]
+
+  - name: grp4_instn_003
+    volumes: ["grp4_vol_03_01","grp4_vol_03_02"]
+
+  - name: grp4_instn_004
+    volumes: ["grp4_vol_04_01","grp4_vol_04_02"]
+

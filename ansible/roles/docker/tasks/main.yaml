@@ -1,0 +1,56 @@
+# Installing dependencies
+- name: Install Dependencies Docker
+  tags: always
+  become: yes
+  apt:
+    name: ['curl', 'apt-transport-https','ca-certificates','software-properties-common','docker.io','python3-pip','python-setuptools']
+    state: latest
+    install_recommends: yes
+    update_cache: yes
+
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Stop docker
+  ansible.builtin.systemd:
+    name: docker
+    state: stopped
+
+- name: Create new directory /data/docker to move /var/lib/docker
+  file:
+    path: /data/docker
+    state: directory
+
+- name: Synchronization /data/docker to move /var/lib/docker
+  ansible.posix.synchronize:
+    src: /var/lib/docker
+    dest: /data/docker
+    archive: true
+    partial: true
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Set Docker data new root directory
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: '{"data-root": "/data/docker/volumes"}'
+    state: present
+    backup: yes
+    create: yes
+
+- name: Start docker
+  ansible.builtin.systemd:
+    name: docker
+    state: restarted
+    daemon_reload: true

@@ -1,0 +1,5 @@
+version: "3.8"
+services:
+  apicollector-world-social:
+    image: 127.0.0.1:5000/stack_collector_world_social
+    build: .

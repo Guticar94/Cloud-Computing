@@ -1,0 +1,62 @@
+- hosts: grp4_db_main
+  gather_facts: true
+  vars_files:
+    - host_vars/couchdb.yaml
+  become: yes
+
+  tasks:
+    - name: Get status cluster
+      uri:
+        url: "http://{{ main }}:5984/_node/_local/_nodes/couchdb@grp4_instn_004.unimelb-comp90024-2023-grp-4.cloud.edu.au"
+        method: GET
+        url_username: "{{ admin_user }}"
+        url_password: "{{ admin_password }}"
+        body:
+          indices: "index names"
+          ignore_unavailable: "true"
+          include_global_state: "false"
+        body_format: json
+        validate_certs: no
+        force_basic_auth: true
+      register: couchdb_info
+
+    - name: Show status
+      ansible.builtin.debug:
+        var: couchdb_info
+
+    - name: Delete node
+      uri:
+        url: "http://{{ admin_user }}:{{ admin_password }}@{{ main }}:5984/_node/_local/_nodes/couchdb@grp4_instn_004.unimelb-comp90024-2023-grp-4.cloud.edu.au?rev={{ couchdb_info.json._rev }}"
+        method: DELETE
+        body_format: json
+        validate_certs: no
+        force_basic_auth: true
+      register: couchdb_info
+
+    - name: Print return info from previous task
+      ansible.builtin.debug:
+        var: couchdb_info
+
+- hosts: grp4_db_new_nodes
+  vars_files:
+    - host_vars/couchdb.yaml
+  become: yes
+
+  tasks:
+    - name: Stop a container
+      community.docker.docker_container:
+        image: ibmcom/couchdb3:3.2.1
+        name: couchdb
+        state: stopped
+
+    - name: Remove container
+      community.docker.docker_container:
+        image: ibmcom/couchdb3:3.2.1
+        name: couchdb
+        state: absent
+
+    - name: Remove image
+      community.docker.docker_image:
+        state: absent
+        name: ibmcom/couchdb3
+        tag: 3.2.1

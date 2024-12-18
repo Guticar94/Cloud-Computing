@@ -1,0 +1,8 @@
+# Adminisrator user and password
+admin_user: admindb
+admin_password: Adm1nC04chDB
+dbversion: 3.2.1
+cookie: a192aeb9904e6590849337933b000c99
+uuid: 96a18f45ff309aa2f6592173c8000b8e
+secret: 96a18f45ff309aa2f6592173c8000cd7
+main: grp4_instn_001.unimelb-comp90024-2023-grp-4.cloud.edu.au

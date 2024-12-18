@@ -1,0 +1,9 @@
+- name: Copy script couchdb_post.sh
+  copy: src=couchdb_post.sh dest=/tmp mode=0755
+
+- name: Run script init couchdb 
+  command: sh /tmp/couchdb_post.sh "{{ admin_user }}" "{{ admin_password }}" "{{ ansible_host }}" "{{ uuid }}" "{{ secret }}" "{{ main }}"
+  register: result
+
+- debug:
+    var: result

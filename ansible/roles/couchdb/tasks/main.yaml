@@ -1,0 +1,37 @@
+- name: Create directory /data/couchd
+  file:
+    path: /data/couchdb
+    state: directory
+    mode: '0755'
+    owner: ubuntu
+    group: ubuntu
+      
+- name: Pull an image
+  docker_image:
+    name: "ibmcom/couchdb3:{{ dbversion }}"
+    source: pull
+
+- name: Create container
+  docker_container:
+    name: couchdb
+    image: "ibmcom/couchdb3:{{ dbversion }}"
+    ports:
+      - "0.0.0.0:4369:4369/tcp"
+      - "0.0.0.0:5984:5984/tcp"
+      - "0.0.0.0:5986:5986/tcp"
+      - "0.0.0.0:9100:9100/tcp"
+    env:
+      COUCHDB_USER: "{{ admin_user }}"
+      COUCHDB_PASSWORD: "{{ admin_password }}"
+      COUCHDB_SECRET: "{{ cookie }}"
+      ERL_FLAGS: "-setcookie {{ cookie }} -name couchdb@{{ ansible_host }}"
+
+- name: Copy script couchdb_init.sh
+  copy: src=couchdb_init.sh dest=/tmp mode=0755
+
+- name: Run script init couchdb 
+  command: sh /tmp/couchdb_init.sh "{{ admin_user }}" "{{ admin_password }}" "{{ ansible_host }}" "{{ uuid }}" "{{ secret }}"
+  register: result
+
+- debug:
+    var: result

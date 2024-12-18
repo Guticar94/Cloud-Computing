@@ -1,0 +1,49 @@
+{
+  "research_team": [
+    {
+      "name": "Andrés Gutiérrez",
+      "affiliation": "The University of Melbourne",
+      "image_url": "/assets/profiles/Andres.jpg",
+      "bio": "Eng. Andrés Guitiérrez is Data Scientist Lead of Cluster and Cloud Computing Team 4 of the University of Melbourne. Data Scientist, Industrial Engineer with a master degree in Analytics, with experience supporting companies digital transformation by performing positions focused on Analytics, excellent skills working with Big Data towards data driven strategies, by programming skills acquired in frameworks like python, Spark and SQL, knowledge of applied math and statistics in machine learning problems and experience in cloud computing solutions.",
+      "links": {
+        "university": "https://www.linkedin.com/in/andres-felipe-gutierrez-carre%C3%B1o-62242378/"
+      }
+    },
+    {
+      "name": "Claudia Caro",
+      "affiliation": "The University of Melbourne",
+      "image_url": "/assets/profiles/Claudia.jpg",
+      "bio": "Eng. Claudia Caro is Infraestructure Lead of Cluster and Cloud Computing Team 4 of the University of Melbourne. A proactive person with achievement-oriented and proficient in analytical troubleshooting, able to provide step-by-step instructions and communicate effectively with all levels of management and staff. Hands-on experience with Windows and Unix environments, and a solid understanding of OpenShift, Middleware products like Apache Tomcat, IIS, Oracle Fusion Middleware and JBoss EAP.",
+      "links": {
+        "university": "https://www.linkedin.com/in/claudia-paola-caro-correa-bb8590a7/"
+      }
+    },
+    {
+      "name": "Haining Xie",
+      "affiliation": "The University of Melbourne",
+      "image_url": "/assets/profiles/Haining.jpg",
+      "bio": "Haining Xie is Software Developer and Database Lead of Cluster and Cloud Computing Team 4 of the University of Melbourne.",
+      "links": {
+        "university": "https://github.com/xhnhill"
+      }
+    },
+    {
+      "name": "Zixuan Xiao",
+      "affiliation": "The University of Melbourne",
+      "image_url": "/assets/profiles/Zixuan.jpg",
+      "bio": "Zixuan Xiao is a Data Scientist and Database Engineer of of Cluster and Cloud Computing Team 4 of the University of Melbourne.",
+      "links": {
+        "university": "https://github.com/ZXXIA1"
+      }
+    },
+    {
+      "name": "Hernán Romano",
+      "affiliation": "The University of Melbourne",
+      "image_url": "/assets/profiles/Hernan.png",
+      "bio": "Eng. Hernán Romano is Software Engineer Lead of Cluster and Cloud Computing Team 4 of the University of Melbourne. Hernán is looking forward to project himself into software development with great passion in Data Science, Machine Learning and Artificial Intelligence.",
+      "links": {
+        "university": "https://www.linkedin.com/in/hernan-romano/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# View Basic info of couchDB
+Couchdb provides simple dashboard to view the databases and its content
+you could login in to the following page to get access:
+http://172.26.131.170:5984/_utils/
+
+Using the following username and password:
+
+admin_user: admindb
+admin_password: Adm1nC04chDB
+
+Please do not delete data.
+
+# Basic view
+
+Just click the database that you want to view, it will show you its content.
+Click on document, it will show you the content of the document.
+Document is the unit in couchDB.

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "SUDO",
+    "url": "https://sudo.eresearch.unimelb.edu.au/",
+    "image_url": "/assets/poweredby/sudo.png"
+  },  
+  {
+    "name": "Python",
+    "url": "https://www.python.org",
+    "image_url": "/assets/poweredby/python.png"
+  },
+  {
+    "name": "Flask",
+    "url": "https://flask.palletsprojects.com/en/2.2.x/",
+    "image_url": "/assets/poweredby/flask.png"
+  },
+  {
+    "name": "CouchDB",
+    "url": "https://couchdb.apache.org/",
+    "image_url": "/assets/poweredby/couchdb.png"
+  },
+  {
+    "name": "Ansible",
+    "url": "https://www.ansible.com/",
+    "image_url": "/assets/poweredby/ansible.png"
+  },
+  {
+    "name": "Docker",
+    "url": "https://www.docker.com/",
+    "image_url": "/assets/poweredby/docker.png"
+  },
+  {
+    "name": "Pandas",
+    "url": "https://pandas.pydata.org",
+    "image_url": "/assets/poweredby/pandas.png"
+  },
+  {
+    "name": "Plotly Dash",
+    "url": "https://plotly.com/dash/",
+    "image_url": "/assets/poweredby/plotly.png"
+  },
+  {
+    "name": "GitHub",
+    "url": "https://github.com/",
+    "image_url": "/assets/poweredby/github.png"
+  },
+  {
+    "name": "Gunicorn",
+    "url": "https://gunicorn.org",
+    "image_url": "/assets/poweredby/gunicorn.png"
+  },
+  {
+    "name": "Mastodon",
+    "url": "https://joinmastodon.org/",
+    "image_url": "/assets/poweredby/mastodon.png"
+  },
+  {
+    "name": "Twitter",
+    "url": "https://twitter.com/",
+    "image_url": "/assets/poweredby/twitter.png"
+  }
+]

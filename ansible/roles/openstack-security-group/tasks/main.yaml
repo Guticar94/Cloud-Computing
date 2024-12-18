@@ -1,0 +1,139 @@
+# Create security groups
+  - name: Create a security group ICMP
+    openstack.cloud.security_group:
+      name: grp4_sg_icmp
+      description: "Security group for ICMP"
+      state: present
+
+  - name: Create a security group CouchDB
+    openstack.cloud.security_group:
+      name: grp4_sg_couchdb
+      description: "Security group for CouchDB"
+      state: present
+
+  - name: Create a security group Docker Swarm
+    openstack.cloud.security_group:
+      name: grp4_sg_swarm
+      description: "Security group for Docker Swarm"
+      state: present
+
+  - name: Create a security group nginxm
+    openstack.cloud.security_group:
+      name: grp4_sg_nginx
+      description: "Security group for nginx"
+      state: present
+
+# Create rules
+  - name: Create ICMP security group rules
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_icmp
+      protocol: icmp
+      port_range_min: -1
+      port_range_max: -1
+      remote_ip_prefix: 0.0.0.0/0
+      state: present
+
+  - name: Egress Rule ICMP
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_icmp
+      direction: egress
+      protocol: any
+      remote_ip_prefix: 0.0.0.0/0
+
+  - name: Egress Rule ICMP
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_icmp
+      direction: egress
+      ethertype: "IPv6"
+      protocol: any
+      remote_ip_prefix: ::/0
+
+  - name: Create CouchDB security group rules
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_couchdb
+      protocol: tcp
+      port_range_min: 4369
+      port_range_max: 4369
+      remote_ip_prefix: 0.0.0.0/0
+      state: present
+
+  - name: Create CouchDB security group rules
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_couchdb
+      protocol: tcp
+      port_range_min: 5984
+      port_range_max: 5984
+      remote_ip_prefix: 0.0.0.0/0
+      state: present
+
+  - name: Create CouchDB security group rules
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_couchdb
+      protocol: tcp
+      port_range_min: 5986
+      port_range_max: 5986
+      remote_ip_prefix: 0.0.0.0/0
+      state: present
+
+  - name: Egress Rule CouchDB
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_couchdb
+      direction: egress
+      protocol: any
+      remote_ip_prefix: 0.0.0.0/0
+
+  - name: Egress Rule CouchDB
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_couchdb
+      direction: egress
+      ethertype: "IPv6"
+      protocol: any
+      remote_ip_prefix: ::/0
+
+  - name: Create Docker Swarm security group rules
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_swarm
+      protocol: tcp
+      port_range_min: 2377
+      port_range_max: 2377
+      remote_ip_prefix: 0.0.0.0/0
+      state: present
+
+  - name: Egress Rule Docker Swarm
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_swarm
+      direction: egress
+      protocol: any
+      remote_ip_prefix: 0.0.0.0/0
+
+  - name: Egress Rule Docker Swarm
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_swarm
+      direction: egress
+      ethertype: "IPv6"
+      protocol: any
+      remote_ip_prefix: ::/0
+
+  - name: Create nginx security group rules
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_nginx
+      protocol: tcp
+      port_range_min: 8080
+      port_range_max: 8080
+      remote_ip_prefix: 0.0.0.0/0
+      state: present
+
+  - name: Egress Rule nginx
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_nginx
+      direction: egress
+      protocol: any
+      remote_ip_prefix: 0.0.0.0/0
+
+  - name: Egress Rule nginx
+    openstack.cloud.security_group_rule:
+      security_group: grp4_sg_nginx
+      direction: egress
+      ethertype: "IPv6"
+      protocol: any
+      remote_ip_prefix: ::/0

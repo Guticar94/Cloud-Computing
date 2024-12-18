@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  webapp:
+    image: 127.0.0.1:5000/stack_webapp
+    build: .
+    ports:
+      - "8051:8051"

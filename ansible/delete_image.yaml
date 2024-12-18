@@ -1,0 +1,23 @@
+- hosts: grp4_db_new_nodes
+  vars_files:
+    - host_vars/couchdb.yaml
+  become: yes
+
+  tasks:
+    - name: Stop a container
+      community.docker.docker_container:
+        image: ibmcom/couchdb3:3.2.1
+        name: couchdb
+        state: stopped
+
+    - name: Remove container
+      community.docker.docker_container:
+        image: ibmcom/couchdb3:3.2.1
+        name: couchdb
+        state: absent
+
+    - name: Remove image
+      community.docker.docker_image:
+        state: absent
+        name: ibmcom/couchdb3
+        tag: 3.2.1

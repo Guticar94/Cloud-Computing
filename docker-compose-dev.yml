@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  couchserver:
+    image: couchdb
+    restart: always
+    ports:
+      - "5984:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=comp90024
+    volumes:
+        - ./CouchDB/dbdata:/opt/couchdb/data
+  webapp:
+    build: ./webapp
+    ports:
+      - "8051:8051"
+    depends_on:
+      - couchserver
+  # apicollector-world-social:
+  #   build: ./APICollector/APICollector_0
+  #   depends_on:
+  #     - couchserver
+  # apicollector-au:
+  #   build: ./APICollector/APICollector_1
+  #   depends_on:
+  #     - couchserver
+  # apicollector-aus-social:
+  #   build: ./APICollector/APICollector_2
+  #   depends_on:
+  #     - couchserver
+  # apicollector-au-local:
+  #   build: ./APICollector/APICollector_1_local
+  #   depends_on:
+  #     - couchserver
+  # apicollector-aus-social-local:
+  #   build: ./APICollector/APICollector_2_local
+  #   depends_on:
+  #     - couchserver
+  # apicollector:
+  #   build: ./APICollector/APICollector
+  #   depends_on:
+  #     - couchserver
+  apicollector-0:
+    build: ./APICollector/APICollector_0
+    depends_on:
+      - couchserver
+  apicollector-1:
+    build: ./APICollector/APICollector_1
+    depends_on:
+      - couchserver

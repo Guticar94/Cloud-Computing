@@ -1,0 +1,103 @@
+- hosts: grp4_db_new_nodes 
+  vars_files:
+    - host_vars/couchdb.yaml
+  become: yes
+
+  roles:
+    - role: couchdb
+
+  tasks:
+    - name: Status container
+      community.docker.docker_container:
+        image: ibmcom/couchdb3:3.2.1
+        name: couchdb
+        state: present
+
+    - name: Get status 
+      uri:
+        url: "http://{{ ansible_host }}:5984/_membership"
+        method: GET
+        url_username: "{{ admin_user }}"
+        url_password: "{{ admin_password }}"
+        body:
+          indices: "index names"
+          ignore_unavailable: "true"
+          include_global_state: "false"
+        body_format: json
+        validate_certs: no
+        force_basic_auth: true
+      register: couchdb_info
+
+    - name: Print return info from previous task
+      ansible.builtin.debug:
+        var: couchdb_info
+
+    - name: Set couchdb_info as a fact
+      set_fact:
+        swarm_info: "{{ couchdb_info }}"
+
+
+- hosts: grp4_db_main
+  gather_facts: true
+  vars_files:
+    - host_vars/couchdb.yaml
+  become: yes
+
+  tasks:
+    - name: Get status cluster
+      uri:
+        url: "http://{{ main }}:5984/_membership" 
+        method: GET
+        url_username: "{{ admin_user }}"
+        url_password: "{{ admin_password }}"
+        body:
+          indices: "index names"
+          ignore_unavailable: "true"
+          include_global_state: "false"
+        body_format: json
+        validate_certs: no
+        force_basic_auth: true
+      register: result
+
+    - name: Show status
+      ansible.builtin.debug:
+        var: result
+          
+    - name: Add node to the cluster
+      uri:
+        url: "http://{{ main }}:5984/_node/_local/_nodes/{{ hostvars[groups['grp4_db_new_nodes'][0]]['couchdb_info']['json']['cluster_nodes'][0] }}"
+        method: PUT
+        url_username: "{{ admin_user }}"
+        url_password: "{{ admin_password }}"
+        body:
+          indices: "index names"
+          ignore_unavailable: "true"
+          include_global_state: "false"
+        body_format: json
+        validate_certs: no
+        force_basic_auth: true
+      register: result
+      failed_when: result.status not in [200, 201]
+
+    - name: Show status
+      ansible.builtin.debug:
+        var: result
+
+    - name: Get status cluster
+      uri:
+        url: "http://{{ main }}:5984/_membership"
+        method: GET
+        url_username: "{{ admin_user }}"
+        url_password: "{{ admin_password }}"
+        body:
+          indices: "index names"
+          ignore_unavailable: "true"
+          include_global_state: "false"
+        body_format: json
+        validate_certs: no
+        force_basic_auth: true
+      register: result
+
+    - name: Show status
+      ansible.builtin.debug:
+        var: result
